@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <meta name="theme-color" content="#087f5b">
+
+  <meta
+    name="description"
+    content="MENA — Connect, Discover and Grow."
+  >
+
+  <title>MENA — Connect. Discover. Grow.</title>
+
+  <!-- MENA CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- ================= TOP HEADER ================= -->
+
+    <header class="top-header">
+
+      <div class="brand">
+        MENA
+      </div>
+
+      <div class="search-box">
+        🔎
+        <input
+          type="text"
+          id="mainSearch"
+          placeholder="Search MENA"
+        >
+      </div>
+
+      <button
+        class="icon-btn"
+        onclick="alert('No new notifications')"
+        aria-label="Notifications"
+      >
+        🔔
+      </button>
+
+    </header>
+
+
+    <!-- ================= HOME ================= -->
+
+    <section
+      id="homePage"
+      class="page active"
+    >
+
+      <div class="welcome">
+        <div>
+          <p class="small-text">
+            Welcome back 👋
+          </p>
+
+          <h1>
+            Discover MENA
+          </h1>
+        </div>
+
+        <div class="online-dot"></div>
+      </div>
+
+
+      <!-- STORIES -->
+
+      <div class="stories-section">
+
+        <div
+          class="story your-story"
+          onclick="createPost()"
+        >
+          <div class="story-plus">
+            ＋
+          </div>
+
+          <span>
+            Your story
+          </span>
+        </div>
+
+
+        <div class="story">
+          <div class="story-avatar">
+            👩🏻
+          </div>
+
+          <span>
+            Selam
+          </span>
+        </div>
+
+
+        <div class="story">
+          <div class="story-avatar">
+            👨🏻
+          </div>
+
+          <span>
+            Dawit
+          </span>
+        </div>
+
+
+        <div class="story">
+          <div class="story-avatar">
+            👩🏻
+          </div>
+
+          <span>
+            Hana
+          </span>
+        </div>
+
+
+        <div class="story">
+          <div class="story-avatar">
+            👨🏻
+          </div>
+
+          <span>
+            Abel
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- LIVE PEOPLE -->
+
+      <div class="section">
+
+        <div class="section-title">
+
+          <div>
+            <h2>
+              🔴 Live Now
+            </h2>
+
+            <p>
+              People streaming now
+            </p>
+          </div>
+
+          <button onclick="startLive()">
+            See all
+          </button>
+
+        </div>
+
+
+        <div class="live-row">
+
+          <div class="live-card">
+
+            <div class="live-photo">
+              👩🏻
+            </div>
+
+            <div class="live-badge">
+              LIVE
+            </div>
+
+            <h3>
+              Hana
+            </h3>
+
+            <p>
+              1.2K viewers
+            </p>
+
+          </div>
+
+
+          <div class="live-card">
+
+            <div class="live-photo">
+              👨🏻
+            </div>
+
+            <div class="live-badge">
+              LIVE
+            </div>
+
+            <h3>
+              Dawit
+            </h3>
+
+            <p>
+              845 viewers
+            </p>
+
+          </div>
+
+
+          <div class="live-card">
+
+            <div class="live-photo">
+              👨🏽
+            </div>
+
+            <div class="live-badge">
+              LIVE
+            </div>
+
+            <h3>
+              Abel
+            </h3>
+
+            <p>
+              530 viewers
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FEED -->
+
+      <div class="section">
+
+        <div class="section-title">
+
+          <div>
+            <h2>
+              For You
+            </h2>
+
+            <p>
+              Latest posts from MENA
+            </p>
+          </div>
+
+        </div>
+
+        <div id="feed"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= MARKET ================= -->
+
+    <section
+      id="marketPage"
+      class="page"
+    >
+
+      <div class="page-title">
+
+        <p class="small-text">
+          MENA Marketplace
+        </p>
+
+        <h1>
+          🛒 Market
+        </h1>
+
+        <p>
+          Buy products and find work opportunities.
+        </p>
+
+      </div>
+
+
+      <!-- MARKET TABS -->
+
+      <div class="market-tabs">
+
+        <button
+          class="active"
+          onclick="showMarketTab('products', this)"
+        >
+          🛒 Products
+        </button>
+
+        <button
+          onclick="showMarketTab('jobs', this)"
+        >
+          💼 Free Work
+        </button>
+
+      </div>
+
+
+      <!-- PRODUCTS -->
+
+      <div id="productsTab">
+
+        <div class="categories">
+
+          <button>
+            All
+          </button>
+
+          <button>
+            📱 Electronics
+          </button>
+
+          <button>
+            👕 Fashion
+          </button>
+
+          <button>
+            🏠 Home
+          </button>
+
+          <button>
+            🚗 Vehicles
+          </button>
+
+        </div>
+
+
+        <div class="section-heading">
+
+          <h2>
+            Products
+          </h2>
+
+          <p>
+            Find products from MENA users.
+          </p>
+
+        </div>
+
+
+        <div
+          id="productGrid"
+          class="product-grid"
+        ></div>
+
+
+        <!-- SELLING FEE -->
+
+        <div class="fee-box">
+
+          <div class="fee-icon">
+            💰
+          </div>
+
+          <div>
+
+            <h3>
+              Sell on MENA
+            </h3>
+
+            <p>
+              Marketplace listing fee: 100 ETB
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FREE WORK -->
+
+      <div
+        id="jobsTab"
+        class="hidden"
+      >
+
+        <div class="work-banner">
+
+          <span>
+            💼
+          </span>
+
+          <h2>
+            Free Work
+          </h2>
+
+          <p>
+            Find work opportunities and contact employers directly.
+          </p>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="postJob()"
+        >
+          ＋ Post Work
+        </button>
+
+
+        <input
+          class="job-search"
+          type="text"
+          placeholder="Search jobs or location"
+        >
+
+
+        <!-- JOB 1 -->
+
+        <div class="job-card">
+
+          <div class="job-icon">
+            💻
+          </div>
+
+          <div class="job-info">
+
+            <h3>
+              Social Media Assistant
+            </h3>
+
+            <p>
+              Help a business manage TikTok,
+              Facebook and Instagram.
+            </p>
+
+            <p>
+              📍 Addis Ababa
+            </p>
+
+            <p>
+              💰 500 ETB / day
+            </p>
+
+            <button
+              onclick="alert('Employer contact: 0912345678')"
+            >
+              Contact Employer
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- JOB 2 -->
+
+        <div class="job-card">
+
+          <div class="job-icon">
+            🧑‍💻
+          </div>
+
+          <div class="job-info">
+
+            <h3>
+              Online Data Entry
+            </h3>
+
+            <p>
+              Simple online data entry work.
+            </p>
+
+            <p>
+              📍 Remote
+            </p>
+
+            <p>
+              💰 1,000 ETB
+            </p>
+
+            <button
+              onclick="alert('Employer contact: 0923456789')"
+            >
+              Contact Employer
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- JOB 3 -->
+
+        <div class="job-card">
+
+          <div class="job-icon">
+            📱
+          </div>
+
+          <div class="job-info">
+
+            <h3>
+              Phone Sales Assistant
+            </h3>
+
+            <p>
+              Help customers choose phones and accessories.
+            </p>
+
+            <p>
+              📍 Bole, Addis Ababa
+            </p>
+
+            <p>
+              💰 800 ETB / day
+            </p>
+
+            <button
+              onclick="alert('Employer contact: 0934567890')"
+            >
+              Contact Employer
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CREATE ================= -->
+
+    <section
+      id="createPage"
+      class="page"
+    >
+
+      <div class="page-title">
+
+        <p class="small-text">
+          Create something
+        </p>
+
+        <h1>
+          Create
+        </h1>
+
+        <p>
+          Share your ideas with the MENA community.
+        </p>
+
+      </div>
+
+
+      <div class="create-card">
+
+        <button
+          onclick="createPost()"
+        >
+          📝
+          <strong>
+            Create Post
+          </strong>
+
+          <span>
+            Share text, photos and ideas.
+          </span>
+        </button>
+
+
+        <button
+          onclick="startLive()"
+        >
+          🔴
+          <strong>
+            Start Live
+          </strong>
+
+          <span>
+            Connect with people in real time.
+          </span>
+        </button>
+
+
+        <button
+          onclick="postJob()"
+        >
+          💼
+          <strong>
+            Post Work
+          </strong>
+
+          <span>
+            Create a work opportunity.
+          </span>
+        </button>
+
+
+        <button
+          onclick="alert('Marketplace listing costs 100 ETB in demo mode.')"
+        >
+          🛒
+          <strong>
+            Sell Product
+          </strong>
+
+          <span>
+            List a product on MENA Market.
+          </span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <section
+      id="profilePage"
+      class="page"
+    >
+
+      <div class="profile-header">
+
+        <div class="profile-photo">
+          👨‍💻
+        </div>
+
+        <h1>
+          See Future
+        </h1>
+
+        <p>
+          @seefuture
+        </p>
+
+
+        <div class="profile-stats">
+
+          <div>
+            <strong>
+              1.2K
+            </strong>
+
+            <span>
+              Followers
+            </span>
+          </div>
+
+
+          <div>
+            <strong>
+              320
+            </strong>
+
+            <span>
+              Following
+            </span>
+          </div>
+
+
+          <div>
+            <strong>
+              25
+            </strong>
+
+            <span>
+              Posts
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- LIVE -->
+
+      <div class="profile-card">
+
+        <h2>
+          🔴 Live
+        </h2>
+
+        <p>
+          Start streaming and connect with people.
+        </p>
+
+        <button
+          class="primary-btn"
+          onclick="startLive()"
+        >
+          Start Live
+        </button>
+
+      </div>
+
+
+      <!-- BALANCE -->
+
+      <div class="profile-card balance-card">
+
+        <h2>
+          💰 Balance
+        </h2>
+
+        <div class="balance-amount">
+          0 ETB
+        </div>
+
+        <p id="telebirrPhone">
+          Telebirr not connected
+        </p>
+
+
+        <div class="balance-buttons">
+
+          <button onclick="connectTelebirr()">
+            📱 Connect Telebirr
+          </button>
+
+          <button onclick="depositMoney()">
+            ＋ Deposit
+          </button>
+
+          <button onclick="withdrawMoney()">
+            Withdraw
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- GIFTS -->
+
+      <div class="profile-card">
+
+        <h2>
+          🎁 Gifts
+        </h2>
+
+        <p>
+          Send gifts to your favorite creators.
+        </p>
+
+
+        <div class="gift-list">
+
+          <button
+            onclick="sendGift('Rose', 10)"
+          >
+            🌹
+            <br>
+            Rose
+            <br>
+            <small>
+              10 coins
+            </small>
+          </button>
+
+
+          <button
+            onclick="sendGift('Heart', 50)"
+          >
+            ❤️
+            <br>
+            Heart
+            <br>
+            <small>
+              50 coins
+            </small>
+          </button>
+
+
+          <button
+            onclick="sendGift('Star', 100)"
+          >
+            ⭐
+            <br>
+            Star
+            <br>
+            <small>
+              100 coins
+            </small>
+          </button>
+
+
+          <button
+            onclick="sendGift('Diamond', 500)"
+          >
+            💎
+            <br>
+            Diamond
+            <br>
+            <small>
+              500 coins
+            </small>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- MY CONTENT -->
+
+      <div class="profile-card">
+
+        <h2>
+          My Content
+        </h2>
+
+
+        <div class="profile-content-tabs">
+
+          <button>
+            📝 Posts
+          </button>
+
+          <button>
+            🎥 Videos
+          </button>
+
+          <button>
+            🔴 Live
+          </button>
+
+          <button>
+            🛒 Market
+          </button>
+
+        </div>
+
+
+        <div class="profile-posts">
+
+          <div>
+            📝
+          </div>
+
+          <div>
+            🎥
+          </div>
+
+          <div>
+            📸
+          </div>
+
+          <div>
+            🛒
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCT MODAL ================= -->
+
+    <div
+      id="productModal"
+      class="modal"
+    >
+
+      <div class="modal-content">
+
+        <button
+          class="close-btn"
+          onclick="closeModal('productModal')"
+        >
+          ✕
+        </button>
+
+
+        <div
+          id="productImage"
+          class="modal-product-image"
+        ></div>
+
+
+        <h2 id="productName">
+          Product
+        </h2>
+
+
+        <h3 id="productPrice">
+          0 ETB
+        </h3>
+
+
+        <p>
+          👤 Seller:
+          <span id="productSeller"></span>
+        </p>
+
+
+        <p>
+          📞 Phone:
+          <span id="productPhone"></span>
+        </p>
+
+
+        <p>
+          📍 Location:
+          <span id="productLocation"></span>
+        </p>
+
+
+        <p>
+          📝 Description:
+        </p>
+
+
+        <p id="productDescription"></p>
+
+
+        <button
+          class="primary-btn"
+          onclick="contactSeller()"
+        >
+          📞 Contact Seller
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+
+    <nav class="bottom-nav">
+
+      <button
+        class="nav active"
+        onclick="openPage('homePage', this)"
+      >
+        🏠
+        <span>
+          Home
+        </span>
+      </button>
+
+
+      <button
+        class="nav"
+        onclick="openPage('marketPage', this)"
+      >
+        🛒
+        <span>
+          Market
+        </span>
+      </button>
+
+
+      <button
+        class="nav create-nav"
+        onclick="openPage('createPage', this)"
+        aria-label="Create"
+      >
+        ＋
+      </button>
+
+
+      <button
+        class="nav"
+        onclick="openPage('profilePage', this)"
+      >
+        👤
+        <span>
+          Profile
+        </span>
+      </button>
+
+    </nav>
+
+  </div>
+
+
+  <!-- MENA JAVASCRIPT -->
+  <script src="script.js"></script>
+
+</body>
+</html>
