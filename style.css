@@ -1,0 +1,95 @@
+/* =====================================================
+   MENA — MAIN STYLES
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green: #087f5b;
+  --green-light: #0aa878;
+  --green-soft: #e8f6f1;
+  --dark: #10251f;
+  --text: #18211e;
+  --muted: #77827e;
+  --bg: #f4f7f6;
+  --white: #ffffff;
+  --line: #e5ebe8;
+  --danger: #e94b62;
+  --shadow: 0 5px 22px rgba(16, 37, 31, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 82px;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================================================
+   APP
+   ===================================================== */
+
+.app {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+}
+
+
+/* =====================================================
+   TOP HEADER
+   ===================================================== */
+
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  height: 68px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  backdrop-filter: blur(15px);
+
+  border-bottom: 1px solid var(--line);
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 14px;
+}
+
+.brand {
+  color: var(--green);
+
+  font-size: 27
