@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="MENA - Social, Market and Work">
+
+  <title>MENA</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<!-- =========================================================
+     AUTHENTICATION
+========================================================= -->
+
+<section id="authPage" class="auth-page">
+
+  <div class="auth-logo">
+    <div class="mena-logo">M</div>
+    <h1>MENA</h1>
+    <p>Connect • Discover • Grow</p>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="auth-box">
+
+    <h2>Welcome back</h2>
+    <p class="auth-subtitle">Login to your MENA account</p>
+
+    <form id="loginForm">
+
+      <div class="input-group">
+        <label for="loginEmail">Email</label>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+      </div>
+
+      <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required>
+      </div>
+
+      <button id="loginBtn" type="submit" class="primary-btn">
+        Login
+      </button>
+
+    </form>
+
+    <p id="loginMessage" class="auth-message"></p>
+
+    <button id="showSignupBtn" type="button" class="text-btn">
+      Don't have an account? Sign up
+    </button>
+
+  </div>
+
+
+  <!-- SIGN UP -->
+  <div id="signupBox" class="auth-box hidden">
+
+    <h2>Create account</h2>
+    <p class="auth-subtitle">Join MENA</p>
+
+    <form id="signupForm">
+
+      <div class="input-group">
+        <label for="signupName">Username</label>
+        <input
+          id="signupName"
+          type="text"
+          placeholder="Choose username"
+          autocomplete="username"
+          minlength="3"
+          required>
+      </div>
+
+      <div class="input-group">
+        <label for="signupEmail">Email</label>
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="Enter email"
+          autocomplete="email"
+          required>
+      </div>
+
+      <div class="input-group">
+        <label for="signupPassword">Password</label>
+        <input
+          id="signupPassword"
+          type="password"
+          placeholder="Create password"
+          autocomplete="new-password"
+          minlength="6"
+          required>
+      </div>
+
+      <div class="input-group">
+        <label for="signupPassword2">Confirm password</label>
+        <input
+          id="signupPassword2"
+          type="password"
+          placeholder="Confirm password"
+          autocomplete="new-password"
+          minlength="6"
+          required>
+      </div>
+
+      <button id="signupBtn" type="submit" class="primary-btn">
+        Create Account
+      </button>
+
+    </form>
+
+    <p id="signupMessage" class="auth-message"></p>
+
+    <button id="showLoginBtn" type="button" class="text-btn">
+      Already have an account? Login
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+========================================================= -->
+
+<div id="appShell" class="app-shell hidden">
+
+
+  <!-- =======================================================
+       TOP BAR
+  ======================================================== -->
+
+  <header class="top-bar">
+
+    <button
+      id="homeLogoBtn"
+      class="brand-button"
+      type="button">
+
+      <span class="small-logo">M</span>
+      <strong>MENA</strong>
+
+    </button>
+
+
+    <div class="top-actions">
+
+      <button
+        id="searchBtn"
+        class="icon-button"
+        type="button"
+        aria-label="Search">
+        🔍
+      </button>
+
+      <button
+        id="inboxBtn"
+        class="icon-button"
+        type="button"
+        aria-label="Inbox">
+
+        💬
+
+        <span
+          id="inboxBadge"
+          class="notification-badge hidden">
+          0
+        </span>
+
+      </button>
+
+      <button
+        id="settingsBtn"
+        class="icon-button"
+        type="button"
+        aria-label="Settings">
+        ⚙️
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       PAGE CONTAINER
+  ======================================================== -->
+
+  <main id="pageContainer">
+
+
+    <!-- =====================================================
+         HOME / TIKTOK STYLE FEED
+    ====================================================== -->
+
+    <section
+      id="homePage"
+      class="page active-page">
+
+      <div class="page-title-row">
+
+        <h2>For You</h2>
+
+        <button
+          id="followingBtn"
+          class="small-tab"
+          type="button">
+          Following
+        </button>
+
+      </div>
+
+
+      <div id="feedContainer" class="feed-container">
+
+        <!-- Real posts will be loaded from Supabase -->
+
+        <div
+          id="feedLoading"
+          class="loading-box">
+
+          <div class="loader"></div>
+          <p>Loading posts...</p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MARKETPLACE
+         AMAZON STYLE
+    ====================================================== -->
+
+    <section
+      id="marketPage"
+      class="page hidden">
+
+      <div class="market-header">
+
+        <div>
+
+          <h2>Market</h2>
+
+          <p>
+            Buy, sell and find work
+          </p>
+
+        </div>
+
+        <button
+          id="marketSearchBtn"
+          class="icon-button"
+          type="button">
+          🔍
+        </button>
+
+      </div>
+
+
+      <!-- MARKET TABS -->
+
+      <div class="market-tabs">
+
+        <button
+          id="marketShopTab"
+          class="market-tab active"
+          type="button">
+          🛍️ Shop
+        </button>
+
+        <button
+          id="marketSellTab"
+          class="market-tab"
+          type="button">
+          💰 Sell
+        </button>
+
+        <button
+          id="marketWorkTab"
+          class="market-tab"
+          type="button">
+          💼 Free Work
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           SHOP
+      ================================================== -->
+
+      <div
+        id="marketShopPage"
+        class="market-subpage">
+
+        <div class="market-search">
+
+          <input
+            id="marketSearchInput"
+            type="search"
+            placeholder="Search products...">
+
+          <button
+            id="marketSearchSubmit"
+            type="button">
+            Search
+          </button>
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="market-section">
+
+          <h3>Categories</h3>
+
+          <div
+            id="marketCategories"
+            class="category-grid">
+
+            <!-- Real categories loaded from database -->
+
+          </div>
+
+        </div>
+
+
+        <!-- Products -->
+
+        <div class="market-section">
+
+          <div class="section-heading">
+
+            <h3>Products</h3>
+
+            <button
+              id="viewAllProductsBtn"
+              type="button"
+              class="link-btn">
+              View all
+            </button>
+
+          </div>
+
+          <div
+            id="productGrid"
+            class="product-grid">
+
+            <!-- Real marketplace products -->
+
+          </div>
+
+        </div>
+
+
+        <!-- Product details -->
+
+        <div
+          id="productDetails"
+          class="market-detail hidden">
+
+          <button
+            id="closeProductDetails"
+            type="button"
+            class="back-button">
+            ← Back
+          </button>
+
+          <div id="productDetailsContent"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           SELL
+      ================================================== -->
+
+      <div
+        id="marketSellPage"
+        class="market-subpage hidden">
+
+        <div class="subpage-header">
+
+          <button
+            id="sellBackBtn"
+            type="button"
+            class="back-button">
+            ←
+          </button>
+
+          <div>
+
+            <h2>Sell on MENA</h2>
+
+            <p>
+              Create your Amazon-style product listing
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <form id="sellProductForm" class="form-card">
+
+          <div class="input-group">
+
+            <label for="sellTitle">
+              Product name
+            </label>
+
+            <input
+              id="sellTitle"
+              type="text"
+              placeholder="Product name"
+              required>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="sellDescription">
+              Description
+            </label>
+
+            <textarea
+              id="sellDescription"
+              rows="5"
+              placeholder="Describe your product..."
+              required></textarea>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="sellCategory">
+              Category
+            </label>
+
+            <select
+              id="sellCategory"
+              required>
+
+              <option value="">
+                Select category
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="sellPrice">
+              Amount you want to receive
+            </label>
+
+            <input
+              id="sellPrice"
+              type="number"
+              min="1"
+              step="0.01"
+              placeholder="Example: 950"
+              required>
+
+            <small>
+              MENA automatically calculates the buyer price
+              including the 5% marketplace fee.
+            </small>
+
+          </div>
+
+
+          <div
+            id="sellerPricePreview"
+            class="price-preview">
+
+            <div>
+              <span>You receive</span>
+              <strong id="sellerReceiveAmount">
+                0 ETB
+              </strong>
+            </div>
+
+            <div>
+              <span>Buyer product price</span>
+              <strong id="buyerProductAmount">
+                0 ETB
+              </strong>
+            </div>
+
+            <div>
+              <span>Delivery</span>
+              <strong>
+                80 ETB
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Product photos
+            </label>
+
+            <button
+              id="sellPhotoBtn"
+              type="button"
+              class="secondary-btn">
+              📷 Add photos
+            </button>
+
+            <div
+              id="sellPhotoPreview"
+              class="media-preview">
+            </div>
+
+          </div>
+
+
+          <button
+            id="publishProductBtn"
+            type="submit"
+            class="primary-btn">
+            Publish Product
+          </button>
+
+        </form>
+
+
+        <!-- MY MARKET -->
+
+        <div class="market-section">
+
+          <h3>My Market</h3>
+
+          <div class="my-market-tabs">
+
+            <button
+              id="myActiveListingsBtn"
+              type="button"
+              class="active">
+              Active
+            </button>
+
+            <button
+              id="mySoldListingsBtn"
+              type="button">
+              Sold
+            </button>
+
+            <button
+              id="myBoughtListingsBtn"
+              type="button">
+              Bought
+            </button>
+
+          </div>
+
+          <div
+            id="myMarketContainer"
+            class="my-market-container">
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           FREE WORK
+      ================================================== -->
+
+      <div
+        id="marketWorkPage"
+        class="market-subpage hidden">
+
+        <div class="subpage-header">
+
+          <div>
+
+            <h2>Free Work</h2>
+
+            <p>
+              Find or publish work
+            </p>
+
+          </div>
+
+          <button
+            id="createWorkBtn"
+            type="button"
+            class="primary-small-btn">
+            + Post Work
+          </button>
+
+        </div>
+
+
+        <div class="work-info-card">
+
+          <strong>
+            Free Work posting
+          </strong>
+
+          <p>
+            Posting fee: <b>50 ETB</b>
+          </p>
+
+          <p>
+            Your post stays active for 30 days.
+          </p>
+
+        </div>
+
+
+        <div
+          id="freeWorkList"
+          class="work-list">
+
+          <!-- Real Free Work posts -->
+
+        </div>
+
+
+        <!-- FREE WORK FORM -->
+
+        <div
+          id="freeWorkFormBox"
+          class="hidden">
+
+          <form
+            id="freeWorkForm"
+            class="form-card">
+
+            <div class="input-group">
+
+              <label for="workTitle">
+                Title
+              </label>
+
+              <input
+                id="workTitle"
+                type="text"
+                placeholder="What work do you offer?"
+                required>
+
+            </div>
+
+
+            <div class="input-group">
+
+              <label for="workDescription">
+                Description
+              </label>
+
+              <textarea
+                id="workDescription"
+                rows="5"
+                placeholder="Describe the work..."
+                required></textarea>
+
+            </div>
+
+
+            <div class="input-group">
+
+              <label for="workLocation">
+                Location
+              </label>
+
+              <input
+                id="workLocation"
+                type="text"
+                placeholder="Location">
+
+            </div>
+
+
+            <div class="work-fee-box">
+
+              Posting fee:
+              <strong>50 ETB</strong>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="primary-btn">
+              Post Free Work
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CREATE
+    ====================================================== -->
+
+    <section
+      id="createPage"
+      class="page hidden">
+
+      <div class="create-header">
+
+        <h2>Create</h2>
+
+        <button
+          id="closeCreateBtn"
+          type="button"
+          class="back-button">
+          Cancel
+        </button>
+
+      </div>
+
+
+      <div class="create-options">
+
+        <button
+          id="createPostBtn"
+          type="button"
+          class="create-option">
+
+          <span>🎬</span>
+
+          <strong>Post</strong>
+
+          <small>
+            Photo or video
+          </small>
+
+        </button>
+
+
+        <button
+          id="createStoryBtn"
+          type="button"
+          class="create-option">
+
+          <span>⭕</span>
+
+          <strong>Story</strong>
+
+          <small>
+            Share for 24 hours
+          </small>
+
+        </button>
+
+
+        <button
+          id="createLiveBtn"
+          type="button"
+          class="create-option">
+
+          <span>🔴</span>
+
+          <strong>Live</strong>
+
+          <small>
+            Start live stream
+          </small>
+
+        </button>
+
+      </div>
+
+
+      <form
+        id="postForm"
+        class="form-card hidden">
+
+        <textarea
+          id="postCaption"
+          rows="4"
+          placeholder="What's happening?">
+        </textarea>
+
+
+        <button
+          id="selectMediaBtn"
+          type="button"
+          class="secondary-btn">
+          📷 Select photo/video
+        </button>
+
+
+        <div
+          id="postMediaPreview"
+          class="media-preview">
+        </div>
+
+
+        <button
+          type="submit"
+          class="primary-btn">
+          Post
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- =====================================================
+         INBOX
+    ====================================================== -->
+
+    <section
+      id="inboxPage"
+      class="page hidden">
+
+      <div class="page-title-row">
+
+        <h2>Inbox</h2>
+
+        <button
+          id="newMessageBtn"
+          type="button"
+          class="icon-button">
+          ✏️
+        </button>
+
+      </div>
+
+
+      <div class="inbox-tabs">
+
+        <button
+          id="messagesTab"
+          type="button"
+          class="active">
+          Messages
+        </button>
+
+        <button
+          id="notificationsTab"
+          type="button">
+          Notifications
+        </button>
+
+        <button
+          id="giftInboxTab"
+          type="button">
+          Gifts
+        </button>
+
+      </div>
+
+
+      <div
+        id="messagesContainer"
+        class="inbox-container">
+
+        <!-- Real messages -->
+
+      </div>
+
+
+      <div
+        id="notificationsContainer"
+        class="inbox-container hidden">
+
+        <!-- Real notifications -->
+
+      </div>
+
+
+      <!-- GIFT ARRIVAL -->
+
+      <div
+        id="giftInboxContainer"
+        class="inbox-container hidden">
+
+        <div class="gift-arrival-header">
+
+          <h3>Gift received</h3>
+
+          <p>
+            Gifts sent to you will appear here.
+          </p>
+
+        </div>
+
+
+        <div
+          id="receivedGiftsList"
+          class="received-gifts-list">
+
+          <!-- Real received gifts -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROFILE / TIKTOK STYLE
+    ====================================================== -->
+
+    <section
+      id="profilePage"
+      class="page hidden">
+
+
+      <div class="profile-header">
+
+        <div class="profile-top">
+
+          <div class="profile-picture-wrapper">
+
+            <img
+              id="profilePicture"
+              src=""
+              alt="Profile"
+              class="profile-picture">
+
+            <button
+              id="changeProfilePictureBtn"
+              type="button"
+              class="profile-camera">
+              📷
+            </button>
+
+          </div>
+
+
+          <div class="profile-stats">
+
+            <div>
+              <strong id="postCount">
+                0
+              </strong>
+              <span>Posts</span>
+            </div>
+
+            <div>
+              <strong id="followerCount">
+                0
+              </strong>
+              <span>Followers</span>
+            </div>
+
+            <div>
+              <strong id="followingCount">
+                0
+              </strong>
+              <span>Following</span>
+            </div>
+
+            <div>
+              <strong id="likeCount">
+                0
+              </strong>
+              <span>Likes</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-name-area">
+
+          <h2 id="profileUsername">
+            Username
+          </h2>
+
+          <p id="profileBio">
+            Welcome to my MENA profile.
+          </p>
+
+        </div>
+
+
+        <div class="profile-actions">
+
+          <button
+            id="editProfileBtn"
+            type="button"
+            class="secondary-btn">
+            Edit profile
+          </button>
+
+          <button
+            id="profileSettingsBtn"
+            type="button"
+            class="secondary-btn">
+            ⚙️
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           PROFILE MONEY AREA
+      ==================================================== -->
+
+      <div class="profile-finance">
+
+        <button
+          id="walletBtn"
+          type="button"
+          class="finance-card">
+
+          <span class="finance-icon">
+            💰
+          </span>
+
+          <span>
+            <strong>Wallet</strong>
+            <small>Balance & earnings</small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          id="withdrawBtn"
+          type="button"
+          class="finance-card">
+
+          <span class="finance-icon">
+            🏦
+          </span>
+
+          <span>
+            <strong>Withdraw</strong>
+            <small>Telebirr / M-PESA</small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          id="buyCoinsBtn"
+          type="button"
+          class="finance-card">
+
+          <span class="finance-icon">
+            🪙
+          </span>
+
+          <span>
+            <strong>Buy Coins</strong>
+            <small>Purchase MENA coins</small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+      </div>
+
+
+      <!-- ===================================================
+           PROFILE CONTENT TABS
+      ==================================================== -->
+
+      <div class="profile-content-tabs">
+
+        <button
+          id="profilePostsTab"
+          type="button"
+          class="active">
+          ▦
+        </button>
+
+        <button
+          id="profileVideosTab"
+          type="button">
+          ▶
+        </button>
+
+        <button
+          id="profileLiveTab"
+          type="button">
+          🔴
+        </button>
+
+      </div>
+
+
+      <div
+        id="profileContent"
+        class="profile-content">
+
+        <!-- Real user's posts -->
+
+      </div>
+
+
+      <!-- ===================================================
+           WALLET PAGE
+      ==================================================== -->
+
+      <div
+        id="walletPage"
+        class="profile-subpage hidden">
+
+        <div class="subpage-header">
+
+          <button
+            id="walletBackBtn"
+            type="button"
+            class="back-button">
+            ←
+          </button>
+
+          <h2>Wallet</h2>
+
+        </div>
+
+
+        <div class="wallet-balance-card">
+
+          <span>Total balance</span>
+
+          <strong id="walletEtbBalance">
+            0.00 ETB
+          </strong>
+
+          <small>
+            Available balance
+          </small>
+
+        </div>
+
+
+        <div class="coin-balance-card">
+
+          <span>Coins</span>
+
+          <strong id="walletCoinBalance">
+            0
+          </strong>
+
+          <button
+            id="walletBuyCoinsBtn"
+            type="button">
+            + Buy Coins
+          </button>
+
+        </div>
+
+
+        <div class="wallet-actions">
+
+          <button
+            id="walletWithdrawBtn"
+            type="button"
+            class="primary-btn">
+            Withdraw
+          </button>
+
+          <button
+            id="walletTransactionsBtn"
+            type="button"
+            class="secondary-btn">
+            Transactions
+          </button>
+
+        </div>
+
+
+        <div
+          id="transactionList"
+          class="transaction-list">
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           WITHDRAW PAGE
+      ==================================================== -->
+
+      <div
+        id="withdrawPage"
+        class="profile-subpage hidden">
+
+        <div class="subpage-header">
+
+          <button
+            id="withdrawBackBtn"
+            type="button"
+            class="back-button">
+            ←
+          </button>
+
+          <h2>Withdraw</h2>
+
+        </div>
+
+
+        <div class="withdraw-info">
+
+          <p>
+            Minimum withdrawal:
+            <strong>10 ETB</strong>
+          </p>
+
+        </div>
+
+
+        <form
+          id="withdrawForm"
+          class="form-card">
+
+          <div class="input-group">
+
+            <label>
+              Payment method
+            </label>
+
+            <select
+              id="withdrawMethod"
+              required>
+
+              <option value="">
+                Select method
+              </option>
+
+              <option value="telebirr">
+                Telebirr
+              </option>
+
+              <option value="mpesa">
+                M-PESA
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Account / phone number
+            </label>
+
+            <input
+              id="withdrawAccount"
+              type="text"
+              placeholder="Enter account number"
+              required>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Amount (ETB)
+            </label>
+
+            <input
+              id="withdrawAmount"
+              type="number"
+              min="10"
+              step="0.01"
+              placeholder="10"
+              required>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="primary-btn">
+            Request Withdrawal
+          </button>
+
+          <p
+            id="withdrawMessage"
+            class="auth-message">
+          </p>
+
+        </form>
+
+      </div>
+
+
+      <!-- ===================================================
+           BUY COINS PAGE
+      ==================================================== -->
+
+      <div
+        id="buyCoinsPage"
+        class="profile-subpage hidden">
+
+        <div class="subpage-header">
+
+          <button
+            id="buyCoinsBackBtn"
+            type="button"
+            class="back-button">
+            ←
+          </button>
+
+          <h2>Buy Coins</h2>
+
+        </div>
+
+
+        <div class="coin-rate-card">
+
+          <strong>
+            MENA Coins
+          </strong>
+
+          <p>
+            1 coin = 0.50 ETB
+          </p>
+
+        </div>
+
+
+        <div
+          id="coinPackages"
+          class="coin-packages">
+
+          <button
+            class="coin-package"
+            data-coins="10"
+            type="button">
+
+            <strong>10</strong>
+            <span>Coins</span>
+            <small>5 ETB</small>
+
+          </button>
+
+
+          <button
+            class="coin-package"
+            data-coins="50"
+            type="button">
+
+            <strong>50</strong>
+            <span>Coins</span>
+            <small>25 ETB</small>
+
+          </button>
+
+
+          <button
+            class="coin-package"
+            data-coins="100"
+            type="button">
+
+            <strong>100</strong>
+            <span>Coins</span>
+            <small>50 ETB</small>
+
+          </button>
+
+
+          <button
+            class="coin-package"
+            data-coins="500"
+            type="button">
+
+            <strong>500</strong>
+            <span>Coins</span>
+            <small>250 ETB</small>
+
+          </button>
+
+
+          <button
+            class="coin-package"
+            data-coins="1000"
+            type="button">
+
+            <strong>1,000</strong>
+            <span>Coins</span>
+            <small>500 ETB</small>
+
+          </button>
+
+
+          <button
+            class="coin-package"
+            data-coins="5000"
+            type="button">
+
+            <strong>5,000</strong>
+            <span>Coins</span>
+            <small>2,500 ETB</small>
+
+          </button>
+
+        </div>
+
+
+        <div class="payment-method-box">
+
+          <h3>Payment method</h3>
+
+          <button
+            id="coinTelebirrBtn"
+            type="button"
+            class="payment-option">
+
+            <span>📱</span>
+            <strong>Telebirr</strong>
+
+          </button>
+
+
+          <button
+            id="coinMpesaBtn"
+            type="button"
+            class="payment-option">
+
+            <span>📱</span>
+            <strong>M-PESA</strong>
+
+          </button>
+
+        </div>
+
+
+        <p
+          id="coinPurchaseMessage"
+          class="auth-message">
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
+    <section
+      id="searchPage"
+      class="page hidden">
+
+      <div class="search-header">
+
+        <button
+          id="searchBackBtn"
+          type="button"
+          class="back-button">
+          ←
+        </button>
+
+        <input
+          id="globalSearchInput"
+          type="search"
+          placeholder="Search MENA...">
+
+      </div>
+
+
+      <div class="search-tabs">
+
+        <button
+          id="searchPeopleTab"
+          type="button"
+          class="active">
+          People
+        </button>
+
+        <button
+          id="searchPostsTab"
+          type="button">
+          Posts
+        </button>
+
+        <button
+          id="searchProductsTab"
+          type="button">
+          Products
+        </button>
+
+      </div>
+
+
+      <div
+        id="searchResults"
+        class="search-results">
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SETTINGS
+    ====================================================== -->
+
+    <section
+      id="settingsPage"
+      class="page hidden">
+
+      <div class="page-title-row">
+
+        <h2>Settings</h2>
+
+        <button
+          id="settingsBackBtn"
+          type="button"
+          class="back-button">
+          ←
+        </button>
+
+      </div>
+
+
+      <div class="settings-list">
+
+        <button
+          id="accountSettingsBtn"
+          type="button"
+          class="settings-item">
+          <span>👤</span>
+          <span>
+            <strong>Account</strong>
+            <small>Username, email and profile</small>
+          </span>
+          <b>›</b>
+        </button>
+
+
+        <button
+          id="privacySettingsBtn"
+          type="button"
+          class="settings-item">
+          <span>🔒</span>
+          <span>
+            <strong>Privacy</strong>
+            <small>Control your privacy</small>
+          </span>
+          <b>›</b>
+        </button>
+
+
+        <button
+          id="notificationSettingsBtn"
+          type="button"
+          class="settings-item">
+          <span>🔔</span>
+          <span>
+            <strong>Notifications</strong>
+            <small>Manage notifications</small>
+          </span>
+          <b>›</b>
+        </button>
+
+
+        <button
+          id="logoutBtn"
+          type="button"
+          class="settings-item danger">
+          <span>🚪</span>
+          <span>
+            <strong>Log out</strong>
+            <small>Sign out of MENA</small>
+          </span>
+          <b>›</b>
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       BOTTOM NAVIGATION
+  ======================================================== -->
+
+  <nav class="bottom-nav">
+
+    <button
+      id="navHome"
+      data-page="homePage"
+      type="button"
+      class="nav-item active">
+
+      <span>⌂</span>
+      <small>Home</small>
+
+    </button>
+
+
+    <button
+      id="navMarket"
+      data-page="marketPage"
+      type="button"
+      class="nav-item">
+
+      <span>🛍️</span>
+      <small>Market</small>
+
+    </button>
+
+
+    <button
+      id="navCreate"
+      type="button"
+      class="nav-create">
+
+      <span>＋</span>
+
+    </button>
+
+
+    <button
+      id="navInbox"
+      data-page="inboxPage"
+      type="button"
+      class="nav-item">
+
+      <span class="nav-icon-with-badge">
+
+        💬
+
+        <span
+          id="bottomInboxBadge"
+          class="notification-badge hidden">
+          0
+        </span>
+
+      </span>
+
+      <small>Inbox</small>
+
+    </button>
+
+
+    <button
+      id="navProfile"
+      data-page="profilePage"
+      type="button"
+      class="nav-item">
+
+      <span>◉</span>
+      <small>Profile</small>
+
+    </button>
+
+  </nav>
+
+</div>
+
+
+<!-- =========================================================
+     GLOBAL MODAL
+========================================================= -->
+
+<div
+  id="globalModal"
+  class="modal hidden"
+  aria-hidden="true">
+
+  <div class="modal-box">
+
+    <button
+      id="modalCloseBtn"
+      type="button"
+      class="modal-close">
+      ×
+    </button>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     MEDIA INPUT
+========================================================= -->
+
+<input
+  id="mediaInput"
+  type="file"
+  accept="image/*,video/*"
+  hidden>
+
+<input
+  id="profilePictureInput"
+  type="file"
+  accept="image/*"
+  hidden>
+
+<input
+  id="sellMediaInput"
+  type="file"
+  accept="image/*"
+  multiple
+  hidden>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
