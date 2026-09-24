@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#087f5b"
+  >
+
+  <meta
+    name="description"
+    content="MENA - Social, Market and Work"
+  >
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <title>MENA</title>
+</head>
+
+<body>
+
+  <!-- INSTALL APP -->
+  <div
+    id="installBanner"
+    class="install-banner hidden"
+  >
+    <div class="install-left">
+      <div class="mena-mini-logo">M</div>
+
+      <div>
+        <strong>Install MENA</strong>
+        <span>Use MENA like an app</span>
+      </div>
+    </div>
+
+    <button id="installButton">
+      Install
+    </button>
+
+    <button
+      id="closeInstall"
+      class="close-install"
+    >
+      ×
+    </button>
+  </div>
+
+
+  <!-- APP -->
+  <main id="app">
+
+    <!-- HEADER -->
+    <header class="top-header">
+
+      <div class="brand">
+        <div class="mena-logo">M</div>
+
+        <div>
+          <h1>MENA</h1>
+          <span>Social • Market • Work</span>
+        </div>
+      </div>
+
+      <button
+        id="searchButton"
+        class="icon-button"
+        aria-label="Search"
+      >
+        🔍
+      </button>
+
+    </header>
+
+
+    <!-- PAGES -->
+
+    <!-- HOME -->
+    <section
+      id="homePage"
+      class="page active"
+    >
+
+      <div class="page-title">
+        <h2>For You</h2>
+        <p>Discover people and content</p>
+      </div>
+
+      <div id="feedContainer">
+
+        <div class="empty-state">
+          <div>🎬</div>
+          <h3>No posts yet</h3>
+          <p>
+            Real posts from MENA users will appear here.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MARKET -->
+    <section
+      id="marketPage"
+      class="page"
+    >
+
+      <div class="page-title">
+        <h2>MENA Market</h2>
+        <p>Buy and sell products</p>
+      </div>
+
+
+      <!-- MARKET SEARCH -->
+
+      <div class="market-search">
+
+        <input
+          id="marketSearch"
+          type="search"
+          placeholder="Search products..."
+        >
+
+        <button id="marketSearchButton">
+          🔍
+        </button>
+
+      </div>
+
+
+      <!-- CATEGORIES -->
+
+      <div class="section-heading">
+        <h3>Categories</h3>
+      </div>
+
+      <div
+        id="marketCategories"
+        class="category-grid"
+      >
+
+        <div class="empty-state small">
+          <div>🛍️</div>
+          <p>
+            Market categories will load from MENA.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCTS -->
+
+      <div class="section-heading">
+        <h3>Products</h3>
+      </div>
+
+      <div
+        id="marketProducts"
+        class="product-grid"
+      >
+
+        <div class="empty-state small">
+          <div>📦</div>
+          <p>
+            Real seller products will appear here.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CREATE -->
+    <section
+      id="createPage"
+      class="page"
+    >
+
+      <div class="page-title">
+        <h2>Create</h2>
+        <p>Share something with MENA</p>
+      </div>
+
+
+      <div class="create-grid">
+
+        <button
+          class="create-card"
+          data-action="post"
+        >
+          <span>🎥</span>
+          <strong>Post</strong>
+          <small>Photo or video</small>
+        </button>
+
+
+        <button
+          class="create-card"
+          data-action="live"
+        >
+          <span>🔴</span>
+          <strong>Go Live</strong>
+          <small>Start a live stream</small>
+        </button>
+
+
+        <button
+          class="create-card"
+          data-action="sell"
+        >
+          <span>🛍️</span>
+          <strong>Sell</strong>
+          <small>Sell a product</small>
+        </button>
+
+
+        <button
+          class="create-card"
+          data-action="work"
+        >
+          <span>💼</span>
+          <strong>Free Work</strong>
+          <small>Post a work opportunity</small>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- INBOX -->
+    <section
+      id="inboxPage"
+      class="page"
+    >
+
+      <div class="page-title">
+        <h2>Inbox</h2>
+        <p>Your messages and activity</p>
+      </div>
+
+      <div class="empty-state">
+        <div>💬</div>
+        <h3>No messages</h3>
+        <p>
+          Your real MENA conversations will appear here.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+    <section
+      id="profilePage"
+      class="page"
+    >
+
+      <!-- PUBLIC PROFILE -->
+
+      <div class="profile-header">
+
+        <div
+          id="profileAvatar"
+          class="profile-avatar"
+        >
+          M
+        </div>
+
+        <div class="profile-info">
+
+          <h2 id="profileName">
+            MENA User
+          </h2>
+
+          <p id="profileUsername">
+            @user
+          </p>
+
+        </div>
+
+        <button
+          id="editProfileButton"
+          class="edit-profile"
+        >
+          Edit
+        </button>
+
+      </div>
+
+
+      <!-- PROFILE STATS -->
+
+      <div class="profile-stats">
+
+        <div>
+          <strong id="followersCount">0</strong>
+          <span>Followers</span>
+        </div>
+
+        <div>
+          <strong id="followingCount">0</strong>
+          <span>Following</span>
+        </div>
+
+        <div>
+          <strong id="likesCount">0</strong>
+          <span>Likes</span>
+        </div>
+
+      </div>
+
+
+      <!-- MENA PROFILE ACTIONS -->
+
+      <div class="profile-actions">
+
+        <button
+          data-profile-action="coins"
+        >
+          <span>🪙</span>
+          <strong>Buy Coins</strong>
+          <small>Buy MENA coins</small>
+        </button>
+
+
+        <button
+          data-profile-action="withdraw"
+        >
+          <span>💰</span>
+          <strong>Withdraw</strong>
+          <small>Withdraw your earnings</small>
+        </button>
+
+
+        <button
+          data-profile-action="market"
+        >
+          <span>🛍️</span>
+          <strong>My Market</strong>
+          <small>Products and purchases</small>
+        </button>
+
+
+        <button
+          data-profile-action="work"
+        >
+          <span>💼</span>
+          <strong>Free Work</strong>
+          <small>Your work posts</small>
+        </button>
+
+      </div>
+
+
+      <!-- MY MARKET -->
+
+      <div
+        id="myMarketSection"
+        class="profile-section"
+      >
+
+        <div class="section-heading">
+          <div>
+            <h3>My Market</h3>
+            <p>Manage your marketplace activity</p>
+          </div>
+
+          <button id="sellFromProfile">
+            + Sell
+          </button>
+        </div>
+
+
+        <div class="market-tabs">
+
+          <button
+            class="market-tab active"
+            data-market-tab="active"
+          >
+            Active
+          </button>
+
+          <button
+            class="market-tab"
+            data-market-tab="sold"
+          >
+            Sold
+          </button>
+
+          <button
+            class="market-tab"
+            data-market-tab="purchases"
+          >
+            Bought
+          </button>
+
+        </div>
+
+
+        <div id="myMarketContent">
+
+          <div class="empty-state small">
+            <div>🛍️</div>
+            <p>
+              Your real marketplace activity will appear here.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE POSTS -->
+
+      <div class="profile-section">
+
+        <div class="section-heading">
+          <h3>My Posts</h3>
+        </div>
+
+        <div
+          id="profilePosts"
+          class="profile-post-grid"
+        >
+
+          <div class="empty-state small">
+            <div>📷</div>
+            <p>No posts yet.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section
+      id="searchPage"
+      class="page"
+    >
+
+      <div class="page-title">
+        <h2>Search</h2>
+        <p>Find people, products and posts</p>
+      </div>
+
+      <div class="search-box">
+
+        <input
+          id="globalSearch"
+          type="search"
+          placeholder="Search MENA..."
+        >
+
+        <button id="globalSearchButton">
+          Search
+        </button>
+
+      </div>
+
+      <div id="searchResults"></div>
+
+    </section>
+
+
+    <!-- AUTH MODAL -->
+
+    <div
+      id="authModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-card">
+
+        <button
+          id="closeAuth"
+          class="modal-close"
+        >
+          ×
+        </button>
+
+        <div class="auth-logo">
+          M
+        </div>
+
+        <h2>Join MENA</h2>
+
+        <p>
+          Create an account to use this feature.
+        </p>
+
+
+        <form id="loginForm">
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="Email"
+            required
+          >
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Password"
+            required
+          >
+
+          <button
+            type="submit"
+            class="primary-button"
+          >
+            Log in
+          </button>
+
+        </form>
+
+
+        <button
+          id="showSignup"
+          class="secondary-button"
+        >
+          Create account
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <nav class="bottom-nav">
+
+      <button
+        class="nav-item active"
+        data-page="homePage"
+      >
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+
+      <button
+        class="nav-item"
+        data-page="marketPage"
+      >
+        <span>🛍️</span>
+        <small>Market</small>
+      </button>
+
+
+      <button
+        class="nav-create"
+        data-page="createPage"
+      >
+        +
+      </button>
+
+
+      <button
+        class="nav-item"
+        data-page="inboxPage"
+      >
+        <span>💬</span>
+        <small>Inbox</small>
+      </button>
+
+
+      <button
+        class="nav-item"
+        data-page="profilePage"
+      >
+        <span>👤</span>
+        <small>Profile</small>
+      </button>
+
+    </nav>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
