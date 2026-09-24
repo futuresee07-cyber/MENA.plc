@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="MENA — Connect, Discover and Grow">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+  <title>MENA</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- AUTH -->
+  <section id="authPage" class="auth-page">
+
+    <div class="auth-card">
+
+      <div class="logo-big">M</div>
+
+      <h1>MENA</h1>
+      <p class="muted center">Connect • Discover • Grow</p>
+
+      <div id="loginBox">
+
+        <h2>Log in</h2>
+
+        <input
+          id="loginEmail"
+          class="input"
+          type="email"
+          placeholder="Email"
+        >
+
+        <input
+          id="loginPassword"
+          class="input"
+          type="password"
+          placeholder="Password"
+        >
+
+        <button id="loginBtn" class="btn primary full">
+          Log in
+        </button>
+
+        <button id="showSignup" class="btn secondary full">
+          Create account
+        </button>
+
+      </div>
+
+      <div id="signupBox" class="hidden">
+
+        <h2>Create account</h2>
+
+        <input
+          id="signupUsername"
+          class="input"
+          placeholder="Username"
+        >
+
+        <input
+          id="signupName"
+          class="input"
+          placeholder="Full name"
+        >
+
+        <input
+          id="signupEmail"
+          class="input"
+          type="email"
+          placeholder="Email"
+        >
+
+        <input
+          id="signupPassword"
+          class="input"
+          type="password"
+          placeholder="Password"
+        >
+
+        <button id="signupBtn" class="btn primary full">
+          Create account
+        </button>
+
+        <button id="showLogin" class="btn secondary full">
+          Back to login
+        </button>
+
+      </div>
+
+      <p id="authMessage" class="message"></p>
+
+    </div>
+
+  </section>
+
+
+  <!-- APP -->
+  <section id="appShell" class="hidden">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+      <button id="brandBtn" class="brand">
+        <span class="logo-small">M</span>
+        <span>
+          <strong>MENA</strong>
+          <small>Connect • Discover • Grow</small>
+        </span>
+      </button>
+
+      <div class="top-actions">
+
+        <button id="searchBtn" class="icon-btn">
+          🔍
+        </button>
+
+        <button id="settingsBtn" class="icon-btn">
+          ⚙️
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+    <section id="searchPanel" class="search-panel hidden">
+
+      <div class="search-row">
+
+        <input
+          id="searchInput"
+          class="input"
+          placeholder="Search MENA..."
+        >
+
+        <button id="searchSubmit" class="btn primary">
+          Search
+        </button>
+
+      </div>
+
+      <div id="searchResults"></div>
+
+    </section>
+
+
+    <!-- PAGES -->
+    <main>
+
+      <!-- HOME -->
+      <section id="homePage" class="page">
+
+        <div class="page-title">
+
+          <div>
+            <h2>For You</h2>
+            <p>Discover MENA.</p>
+          </div>
+
+          <button id="refreshBtn" class="icon-btn">
+            ↻
+          </button>
+
+        </div>
+
+        <div class="section-head">
+          <h3>Latest posts</h3>
+        </div>
+
+        <div id="postFeed"></div>
+
+      </section>
+
+
+      <!-- MARKET -->
+      <section id="marketPage" class="page hidden">
+
+        <div class="page-title">
+
+          <div>
+            <h2>Marketplace</h2>
+            <p>Buy and sell products.</p>
+          </div>
+
+          <button id="sellBtn" class="btn primary">
+            ＋ Sell
+          </button>
+
+        </div>
+
+        <div class="notice">
+          <b>MENA marketplace fee: 5%</b>
+          <br>
+          Delivery: 80 ETB
+        </div>
+
+        <div id="marketList"></div>
+
+      </section>
+
+
+      <!-- FREE WORK -->
+      <section id="workPage" class="page hidden">
+
+        <div class="page-title">
+
+          <div>
+            <h2>Free Work</h2>
+            <p>Find work opportunities.</p>
+          </div>
+
+          <button id="workPostBtn" class="btn primary">
+            ＋ Post
+          </button>
+
+        </div>
+
+        <div class="notice">
+          Free Work posting fee: <b>50 ETB</b>
+          <br>
+          Active for 30 days.
+        </div>
+
+        <div id="workList"></div>
+
+      </section>
+
+
+      <!-- PROFILE -->
+      <section id="profilePage" class="page hidden">
+
+        <div id="profileContent"></div>
+
+      </section>
+
+
+      <!-- SETTINGS -->
+      <section id="settingsPage" class="page hidden">
+
+        <div class="page-title">
+          <h2>Settings</h2>
+        </div>
+
+        <div class="settings-list">
+
+          <button id="editProfileBtn" class="settings-item">
+            ✏️ Edit profile
+          </button>
+
+          <button id="walletBtn" class="settings-item">
+            💰 Wallet
+          </button>
+
+          <button id="coinBtn" class="settings-item">
+            🪙 Coin shop
+          </button>
+
+          <button id="marketSettingsBtn" class="settings-item">
+            🛍 My Market
+          </button>
+
+          <button id="logoutBtn" class="settings-item danger">
+            🚪 Log out
+          </button>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+      <button data-page="home" class="nav-btn active">
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+      <button data-page="market" class="nav-btn">
+        <span>🛍</span>
+        <small>Market</small>
+      </button>
+
+      <button id="createBtn" class="create-btn">
+        ＋
+      </button>
+
+      <button data-page="work" class="nav-btn">
+        <span>💼</span>
+        <small>Work</small>
+      </button>
+
+      <button data-page="profile" class="nav-btn">
+        <span>◉</span>
+        <small>Profile</small>
+      </button>
+
+    </nav>
+
+  </section>
+
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-card">
+
+      <button id="modalClose" class="modal-close">
+        ×
+      </button>
+
+      <div id="modalContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MEDIA -->
+  <input
+    id="mediaInput"
+    type="file"
+    accept="image/*,video/*"
+    capture="environment"
+    hidden
+  >
+
+</body>
+</html>
