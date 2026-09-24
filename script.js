@@ -1548,16 +1548,3 @@ console.log(
    END OF STEP 5
    ========================================================= */
 
-After pasting
-
-1. Open GitHub → "script.js".
-2. Delete the old entire code.
-3. Paste the code above.
-4. Save/commit.
-5. Open your MENA GitHub Pages website.
-6. Press Create Account / Sign Up.
-7. Test with a real email and password.
-
-Your browser uses the Supabase publishable key, which is intended for browser applications; database access is still controlled by Supabase Auth and your RLS policies.
-
-Important: this step creates/authenticates real users. It does not yet make the marketplace, posts, wallets, coins, purchases, or withdrawals functional. Those are the next backend steps.
