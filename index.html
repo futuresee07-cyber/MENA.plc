@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#087f5b">
+
+  <meta
+    name="description"
+    content="MENA — Connect, Discover, Buy, Sell and Grow"
+  >
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+  <title>MENA</title>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <!-- ================================
+       MAIN APP
+  ================================= -->
+
+  <div id="appShell">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+      <button
+        class="brand"
+        data-page="home"
+        type="button"
+        aria-label="MENA Home"
+      >
+        <span class="logo">M</span>
+        <strong>MENA</strong>
+      </button>
+
+      <div class="top-actions">
+
+        <button
+          id="searchBtn"
+          class="circle"
+          type="button"
+          aria-label="Search"
+        >
+          ⌕
+        </button>
+
+        <button
+          id="settingsBtn"
+          class="circle"
+          type="button"
+          aria-label="Settings"
+        >
+          ⚙
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- ================================
+         PAGES
+    ================================= -->
+
+    <main id="pageContainer">
+
+
+      <!-- ================================
+           HOME / SOCIAL FEED
+      ================================= -->
+
+      <section
+        id="homePage"
+        class="page active"
+        data-page="home"
+      >
+
+        <div class="page-header">
+          <div>
+            <h1>Home</h1>
+            <p>Discover what's happening on MENA.</p>
+          </div>
+        </div>
+
+        <div
+          id="feedContainer"
+          class="feed-container"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================
+           MARKET
+      ================================= -->
+
+      <section
+        id="marketPage"
+        class="page"
+        data-page="market"
+      >
+
+        <div class="page-header">
+          <div>
+            <h1>Market</h1>
+            <p>Buy, sell and find opportunities.</p>
+          </div>
+        </div>
+
+
+        <!-- MARKET TABS -->
+
+        <div class="market-tabs">
+
+          <button
+            class="market-tab active"
+            data-market-tab="shop"
+            type="button"
+          >
+            Shop
+          </button>
+
+          <button
+            class="market-tab"
+            data-market-tab="sell"
+            type="button"
+          >
+            Sell
+          </button>
+
+          <button
+            class="market-tab"
+            data-market-tab="work"
+            type="button"
+          >
+            Free Work
+          </button>
+
+        </div>
+
+
+        <!-- SHOP -->
+
+        <div
+          id="marketShopPage"
+          class="market-section active"
+        >
+
+          <div
+            id="marketCategories"
+            class="market-categories"
+          ></div>
+
+          <div
+            id="marketProducts"
+            class="product-grid"
+          ></div>
+
+        </div>
+
+
+        <!-- SELL -->
+
+        <div
+          id="marketSellPage"
+          class="market-section"
+        >
+
+          <div class="section-card">
+
+            <h2>Sell on MENA</h2>
+
+            <p class="muted">
+              Enter the amount you want to receive.
+              MENA calculates the buyer price automatically.
+            </p>
+
+            <form id="sellForm">
+
+              <input
+                id="sellTitle"
+                type="text"
+                placeholder="Product name"
+                required
+              >
+
+              <textarea
+                id="sellDescription"
+                placeholder="Product description"
+                rows="4"
+                required
+              ></textarea>
+
+              <input
+                id="sellDesiredAmount"
+                type="number"
+                min="1"
+                step="0.01"
+                placeholder="Amount you want to receive"
+                required
+              >
+
+              <select
+                id="sellCategory"
+                required
+              >
+                <option value="">
+                  Select category
+                </option>
+              </select>
+
+              <input
+                id="sellImage"
+                type="file"
+                accept="image/*"
+              >
+
+              <div
+                id="sellerPricePreview"
+                class="price-preview"
+              >
+                Buyer product price:
+                <strong>0 ETB</strong>
+              </div>
+
+              <button
+                type="submit"
+                class="primary-btn"
+              >
+                Publish Product
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+
+        <!-- FREE WORK -->
+
+        <div
+          id="marketWorkPage"
+          class="market-section"
+        >
+
+          <div class="section-card">
+
+            <h2>Free Work</h2>
+
+            <p class="muted">
+              Post a work opportunity for 30 days.
+            </p>
+
+            <form id="freeWorkForm">
+
+              <input
+                id="freeWorkTitle"
+                type="text"
+                placeholder="Work title"
+                required
+              >
+
+              <textarea
+                id="freeWorkDescription"
+                rows="5"
+                placeholder="Describe the work"
+                required
+              ></textarea>
+
+              <input
+                id="freeWorkLocation"
+                type="text"
+                placeholder="Location"
+              >
+
+              <button
+                type="submit"
+                class="primary-btn"
+              >
+                Publish — 50 ETB
+              </button>
+
+            </form>
+
+          </div>
+
+          <div
+            id="freeWorkList"
+            class="work-list"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================
+           CREATE
+      ================================= -->
+
+      <section
+        id="createPage"
+        class="page"
+        data-page="create"
+      >
+
+        <div class="page-header">
+          <h1>Create</h1>
+          <p>Share something with MENA.</p>
+        </div>
+
+        <div class="create-options">
+
+          <button
+            id="createPostBtn"
+            class="create-option"
+            type="button"
+          >
+            <span>＋</span>
+            <strong>Create Post</strong>
+            <small>Photo or video</small>
+          </button>
+
+          <button
+            id="createLiveBtn"
+            class="create-option"
+            type="button"
+          >
+            <span>🔴</span>
+            <strong>Go Live</strong>
+            <small>Start a live stream</small>
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================
+           INBOX
+      ================================= -->
+
+      <section
+        id="inboxPage"
+        class="page"
+        data-page="inbox"
+      >
+
+        <div class="page-header">
+
+          <div>
+            <h1>Inbox</h1>
+            <p>Messages, notifications and gifts.</p>
+          </div>
+
+        </div>
+
+
+        <div class="inbox-tabs">
+
+          <button
+            class="inbox-tab active"
+            data-inbox-tab="messages"
+            type="button"
+          >
+            Messages
+          </button>
+
+          <button
+            class="inbox-tab"
+            data-inbox-tab="notifications"
+            type="button"
+          >
+            Notifications
+          </button>
+
+          <button
+            class="inbox-tab"
+            data-inbox-tab="gifts"
+            type="button"
+          >
+            Gifts
+          </button>
+
+        </div>
+
+
+        <div
+          id="inboxContent"
+          class="inbox-content"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================
+           PROFILE
+      ================================= -->
+
+      <section
+        id="profilePage"
+        class="page"
+        data-page="profile"
+      >
+
+        <div class="profile-card">
+
+          <div class="profile-picture-wrap">
+
+            <img
+              id="profilePicture"
+              class="profile-picture"
+              src=""
+              alt="Profile"
+            >
+
+          </div>
+
+          <h1 id="profileUsername">
+            Guest
+          </h1>
+
+          <p id="profileBio">
+            Join MENA to create your profile.
+          </p>
+
+
+          <div class="profile-stats">
+
+            <div>
+              <strong id="profilePosts">
+                0
+              </strong>
+              <span>Posts</span>
+            </div>
+
+            <div>
+              <strong id="profileFollowers">
+                0
+              </strong>
+              <span>Followers</span>
+            </div>
+
+            <div>
+              <strong id="profileFollowing">
+                0
+              </strong>
+              <span>Following</span>
+            </div>
+
+            <div>
+              <strong id="profileLikes">
+                0
+              </strong>
+              <span>Likes</span>
+            </div>
+
+          </div>
+
+
+          <div class="profile-actions">
+
+            <button
+              id="editProfileBtn"
+              type="button"
+            >
+              Edit Profile
+            </button>
+
+            <button
+              id="logoutBtn"
+              type="button"
+            >
+              Logout
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROFILE TABS -->
+
+        <div class="profile-tabs">
+
+          <button
+            class="profile-tab active"
+            data-profile-tab="posts"
+            type="button"
+          >
+            Posts
+          </button>
+
+          <button
+            class="profile-tab"
+            data-profile-tab="market"
+            type="button"
+          >
+            My Market
+          </button>
+
+          <button
+            class="profile-tab"
+            data-profile-tab="live"
+            type="button"
+          >
+            Live
+          </button>
+
+        </div>
+
+
+        <div
+          id="profileContent"
+          class="profile-content"
+        ></div>
+
+
+        <!-- PROFILE MONEY -->
+
+        <div class="profile-menu">
+
+          <button
+            id="walletBtn"
+            type="button"
+          >
+            <span>💰</span>
+            <div>
+              <strong>Wallet</strong>
+              <small>Coins and ETB balance</small>
+            </div>
+          </button>
+
+          <button
+            id="withdrawBtn"
+            type="button"
+          >
+            <span>↗</span>
+            <div>
+              <strong>Withdraw</strong>
+              <small>Withdraw your earnings</small>
+            </div>
+          </button>
+
+          <button
+            id="buyCoinsBtn"
+            type="button"
+          >
+            <span>🪙</span>
+            <div>
+              <strong>Buy Coins</strong>
+              <small>Purchase MENA coins</small>
+            </div>
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================
+           WALLET
+      ================================= -->
+
+      <section
+        id="walletPage"
+        class="page"
+        data-page="wallet"
+      >
+
+        <div class="page-header">
+
+          <button
+            class="back-btn"
+            data-page="profile"
+            type="button"
+          >
+            ←
+          </button>
+
+          <div>
+            <h1>Wallet</h1>
+            <p>Your MENA balance.</p>
+          </div>
+
+        </div>
+
+
+        <div class="wallet-cards">
+
+          <div class="wallet-card">
+
+            <span>Coins</span>
+
+            <strong id="walletCoins">
+              0
+            </strong>
+
+          </div>
+
+          <div class="wallet-card">
+
+            <span>ETB</span>
+
+            <strong id="walletEtb">
+              0.00
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="walletTransactions"
+          class="transactions"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================
+           WITHDRAW
+      ================================= -->
+
+      <section
+        id="withdrawPage"
+        class="page"
+        data-page="withdraw"
+      >
+
+        <div class="page-header">
+
+          <button
+            class="back-btn"
+            data-page="profile"
+            type="button"
+          >
+            ←
+          </button>
+
+          <div>
+            <h1>Withdraw</h1>
+            <p>Withdraw your available balance.</p>
+          </div>
+
+        </div>
+
+
+        <div class="section-card">
+
+          <div class="withdraw-balance">
+            Available:
+            <strong id="withdrawBalance">
+              0.00 ETB
+            </strong>
+          </div>
+
+          <form id="withdrawForm">
+
+            <select
+              id="withdrawMethod"
+              required
+            >
+              <option value="">
+                Select payment method
+              </option>
+
+              <option value="telebirr">
+                Telebirr
+              </option>
+
+              <option value="mpesa">
+                M-PESA
+              </option>
+            </select>
+
+            <input
+              id="withdrawAccount"
+              type="text"
+              placeholder="Phone/account number"
+              required
+            >
+
+            <input
+              id="withdrawAmount"
+              type="number"
+              min="10"
+              step="0.01"
+              placeholder="Amount"
+              required
+            >
+
+            <button
+              type="submit"
+              class="primary-btn"
+            >
+              Request Withdrawal
+            </button>
+
+          </form>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================
+           BUY COINS
+      ================================= -->
+
+      <section
+        id="buyCoinsPage"
+        class="page"
+        data-page="buyCoins"
+      >
+
+        <div class="page-header">
+
+          <button
+            class="back-btn"
+            data-page="profile"
+            type="button"
+          >
+            ←
+          </button>
+
+          <div>
+            <h1>Buy Coins</h1>
+            <p>1 coin = 0.50 ETB.</p>
+          </div>
+
+        </div>
+
+
+        <div
+          id="coinPackages"
+          class="coin-packages"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================
+           SEARCH
+      ================================= -->
+
+      <section
+        id="searchPage"
+        class="page"
+        data-page="search"
+      >
+
+        <div class="page-header">
+
+          <h1>Search</h1>
+
+        </div>
+
+        <div class="search-box">
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search MENA..."
+            autocomplete="off"
+          >
+
+          <button
+            id="searchSubmit"
+            type="button"
+          >
+            Search
+          </button>
+
+        </div>
+
+        <div
+          id="searchResults"
+          class="search-results"
+        ></div>
+
+      </section>
+
+
+      <!-- ================================
+           SETTINGS
+      ================================= -->
+
+      <section
+        id="settingsPage"
+        class="page"
+        data-page="settings"
+      >
+
+        <div class="page-header">
+
+          <h1>Settings</h1>
+
+        </div>
+
+
+        <div class="settings-list">
+
+          <button
+            id="accountSettingsBtn"
+            type="button"
+          >
+            Account
+          </button>
+
+          <button
+            id="privacySettingsBtn"
+            type="button"
+          >
+            Privacy
+          </button>
+
+          <button
+            id="notificationSettingsBtn"
+            type="button"
+          >
+            Notifications
+          </button>
+
+          <button
+            id="aboutBtn"
+            type="button"
+          >
+            About MENA
+          </button>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ================================
+         BOTTOM NAVIGATION
+    ================================= -->
+
+    <nav class="bottom-nav">
+
+      <button
+        data-page="home"
+        type="button"
+      >
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+      <button
+        data-page="market"
+        type="button"
+      >
+        <span>🛍</span>
+        <small>Market</small>
+      </button>
+
+      <button
+        id="createBtn"
+        class="create"
+        type="button"
+        aria-label="Create"
+      >
+        ＋
+      </button>
+
+      <button
+        data-page="inbox"
+        type="button"
+      >
+        <span>✉</span>
+        <small>Inbox</small>
+      </button>
+
+      <button
+        data-page="profile"
+        type="button"
+      >
+        <span>◉</span>
+        <small>Profile</small>
+      </button>
+
+    </nav>
+
+  </div>
+
+
+  <!-- ================================
+       AUTH MODAL
+  ================================= -->
+
+  <div
+    id="authModal"
+    class="modal hidden"
+    aria-hidden="true"
+  >
+
+    <div class="modal-box">
+
+      <button
+        id="authModalClose"
+        class="modal-close"
+        type="button"
+      >
+        ×
+      </button>
+
+
+      <!-- LOGIN -->
+
+      <div id="loginBox">
+
+        <h2>Welcome to MENA</h2>
+
+        <p>
+          Login to continue.
+        </p>
+
+        <form id="loginForm">
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+          >
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            id="loginBtn"
+            type="submit"
+            class="primary-btn"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <p id="loginMessage"></p>
+
+        <button
+          id="showSignupBtn"
+          class="text-button"
+          type="button"
+        >
+          Don't have an account? Sign Up
+        </button>
+
+      </div>
+
+
+      <!-- SIGN UP -->
+
+      <div
+        id="signupBox"
+        class="hidden"
+      >
+
+        <h2>Create your MENA account</h2>
+
+        <p>
+          Join MENA to post, follow, buy, sell and earn.
+        </p>
+
+        <form id="signupForm">
+
+          <input
+            id="signupName"
+            type="text"
+            placeholder="Name"
+            autocomplete="name"
+            required
+          >
+
+          <input
+            id="signupEmail"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+          >
+
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+          <input
+            id="signupPassword2"
+            type="password"
+            placeholder="Confirm password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+          <button
+            id="signupBtn"
+            type="submit"
+            class="primary-btn"
+          >
+            Create Account
+          </button>
+
+        </form>
+
+        <p id="signupMessage"></p>
+
+        <button
+          id="showLoginBtn"
+          class="text-button"
+          type="button"
+        >
+          Already have an account? Login
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================================
+       GENERAL MODAL
+  ================================= -->
+
+  <div
+    id="globalModal"
+    class="modal hidden"
+    aria-hidden="true"
+  >
+
+    <div class="modal-box">
+
+      <button
+        id="modalCloseBtn"
+        class="modal-close"
+        type="button"
+      >
+        ×
+      </button>
+
+      <div id="modalContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MEDIA UPLOAD -->
+
+  <input
+    id="mediaInput"
+    type="file"
+    accept="image/*,video/*"
+    capture="environment"
+    hidden
+  >
+
+
+  <!-- MENA SCRIPT -->
+
+  <script src="script.js"></script>
+
+
+  <!-- SERVICE WORKER -->
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .catch(error => {
+            console.log("Service Worker:", error);
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>
